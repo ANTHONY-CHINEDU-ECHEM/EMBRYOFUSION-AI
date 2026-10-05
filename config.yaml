@@ -1,0 +1,46 @@
+# EmbryoFusion AI configuration. Paths are relative to the repository root.
+seed: 5
+
+data:
+  n_transfers: 10000
+  root: data/paired
+  render_size: 192
+  image_size: 64
+  split: {train: 0.70, val: 0.15, test: 0.15}
+
+model:
+  tabular_hidden: [64, 32]
+  image_embedding: 128
+  fusion_hidden: 64
+  dropout: 0.2
+  modality_dropout: 0.1       # chance of hiding one branch during fusion training
+  vit:                        # Hugging Face ViT settings, used when image_encoder is vit
+    pretrained_name: null     # for example google/vit-base-patch16-224-in21k (needs internet and image_size 224)
+    patch_size: 8
+    hidden_size: 96
+    layers: 4
+    heads: 4
+
+training:
+  batch_size: 64
+  epochs: 6
+  learning_rate: 0.002
+  weight_decay: 0.0005
+  patience: 4
+  experiments:
+    - {name: tabular_only, mode: tabular}
+    - {name: image_only_cnn, mode: image, image_encoder: cnn}
+    - {name: fusion_cnn, mode: fusion, image_encoder: cnn}
+    - {name: fusion_vit, mode: fusion, image_encoder: vit}
+
+tracking:
+  project: embryofusion
+  mode: offline               # offline | online | disabled
+
+evaluation:
+  bootstrap_rounds: 500
+
+artifacts:
+  model_dir: artifacts
+  report_dir: reports
+  figure_dir: docs/images
