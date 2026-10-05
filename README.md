@@ -3,7 +3,7 @@
 **Multimodal fusion of patient records and embryo images for IVF outcome prediction**
 
 <p align="center">
-  <img src="docs/images/example_cases.png" alt="Cases where the clinical record and the embryo image disagree" width="920">
+  <img width="2000" height="1152" alt="example_cases" src="https://github.com/user-attachments/assets/4ff280a9-b88a-41ce-9501-c0cf99a62971" />
 </p>
 
 ## Project brief
@@ -45,8 +45,8 @@ On 1,441 transfers from patients held out of training, the clinical record alone
   <tr><td><b>Joint fusion, CNN image branch</b></td><td align="center"><b>0.743 (0.713 to 0.768)</b></td><td align="center"><b>0.577</b></td><td align="center"><b>0.182</b></td><td align="center">565,145</td></tr>
 </table>
 
-<p align="center"><img src="docs/images/roc_curves.png" alt="ROC curves" width="470"></p>
-<p align="center"><img src="docs/images/auc_intervals.png" alt="AUC with bootstrap intervals" width="640"></p>
+<p align="center"><img width="928" height="848" alt="roc_curves" src="https://github.com/user-attachments/assets/264a4bd9-40f0-41ce-bb94-12988845bfc0" /></p>
+<p align="center"><img width="1216" height="624" alt="auc_intervals" src="https://github.com/user-attachments/assets/f3108278-092e-49e6-ac47-407f6197912a" /></p>
 
 The individual intervals overlap, which is why the project does not stop there. Scoring both models on the same resampled patients removes most of the shared noise: the fusion model beats the image only model by 0.024 AUC (95 percent interval 0.007 to 0.040, positive in 99.8 percent of resamples) and beats the clinical record model by 0.096 (0.068 to 0.124). In operational terms, transfers in the top quarter of fused scores ended in pregnancy 59 percent of the time and those in the bottom quarter 12 percent of the time, against a cohort rate of 30 percent.
 
@@ -58,7 +58,7 @@ The engineering conclusion is useful. Late fusion is easier to build, lets each 
 
 ### The fusion model uses both views and degrades gracefully when one is missing
 
-<p align="center"><img src="docs/images/modality_ablation.png" alt="Fusion model performance with each view withheld or swapped" width="640"></p>
+<p align="center"><img width="1216" height="576" alt="modality_ablation" src="https://github.com/user-attachments/assets/cd382efe-f751-41ab-8010-3a9a3b0ca513" /></p>
 
 With the image withheld, the fusion model scores 0.643, essentially the same as the dedicated clinical record model (0.647). With the record withheld it scores 0.714, close to the dedicated image model (0.719). Modality dropout during training is what makes this possible: one network can serve a clinic whose imaging system is offline without a separate fallback model.
 
@@ -70,7 +70,7 @@ The Hugging Face ViT branch, trained from scratch on 6,846 images, reaches 0.730
 
 ### Where each view matters
 
-<p align="center"><img src="docs/images/subgroup_auc.png" alt="AUC by maternal age and embryo quality" width="860"></p>
+<p align="center"><img width="1840" height="624" alt="subgroup_auc" src="https://github.com/user-attachments/assets/3509ac39-c41c-49b5-b76f-aff0827eff91" /></p>
 
 Among patients aged 38 and over the image carries almost everything: the image model scores 0.773 and fusion adds nothing (0.774), because in that group embryo quality is the dominant source of variation. Under 35 the two views are complementary (0.640 and 0.706 alone, 0.740 fused). Within a fixed embryo quality group the picture reverses: once the grade is held constant the image has much less to say (0.60 to 0.62) and the clinical record matches or exceeds it (0.61 to 0.65), with fusion ahead in both groups (0.686 for good embryos, 0.627 for poorer ones). The practical message for counselling is that the patient's record matters most when choosing whether to transfer a given embryo, and the image matters most when choosing between embryos.
 
@@ -88,7 +88,7 @@ Among patients aged 38 and over the image carries almost everything: the image m
 
 Splitting is done by patient, so a woman with two transfers never appears in both training and test data, and a test asserts that the reference embryo grades used for analysis can never enter the model inputs.
 
-<p align="center"><img src="docs/images/training_curves.png" alt="Validation AUC by epoch for each tracked run" width="560"></p>
+<p align="center"><img width="1120" height="608" alt="training_curves" src="https://github.com/user-attachments/assets/37f69c83-c031-4e01-885a-4db7595c253a" /></p>
 
 ## Architecture
 
