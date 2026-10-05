@@ -1,0 +1,146 @@
+{
+  "rows": {
+    "train": 6846,
+    "val": 1463,
+    "test": 1441
+  },
+  "pregnancy_rate": 0.2956923076923077,
+  "processing_audit": {
+    "duplicate_transfers_removed": 40,
+    "cause_labels_normalised": 422,
+    "out_of_range_bmi": 31,
+    "clinical_records_without_image": 150,
+    "images_without_clinical_record": 100,
+    "paired_transfers": 9750
+  },
+  "results": {
+    "tabular_only": {
+      "name": "tabular_only",
+      "mode": "tabular",
+      "parameters": 5473,
+      "best_epoch": 4,
+      "train_seconds": 10.2,
+      "val_roc_auc": 0.653146546754295,
+      "test": {
+        "roc_auc": 0.6472794952230295,
+        "roc_auc_ci": [
+          0.6174842384101212,
+          0.6754669998975747
+        ],
+        "pr_auc": 0.4685309516314355,
+        "brier": 0.2029704451560974
+      }
+    },
+    "image_only_cnn": {
+      "name": "image_only_cnn",
+      "mode": "image",
+      "image_encoder": "cnn",
+      "parameters": 559801,
+      "best_epoch": 5,
+      "train_seconds": 264.4,
+      "val_roc_auc": 0.7042914793035858,
+      "test": {
+        "roc_auc": 0.7190278932175064,
+        "roc_auc_ci": [
+          0.6897865378813812,
+          0.7470183182004718
+        ],
+        "pr_auc": 0.5291042011372606,
+        "brier": 0.18879152834415436
+      }
+    },
+    "fusion_cnn": {
+      "name": "fusion_cnn",
+      "mode": "fusion",
+      "image_encoder": "cnn",
+      "parameters": 565145,
+      "best_epoch": 5,
+      "train_seconds": 234.4,
+      "val_roc_auc": 0.7368845843422115,
+      "test": {
+        "roc_auc": 0.7428971052184714,
+        "roc_auc_ci": [
+          0.7133526957721014,
+          0.7682461287438981
+        ],
+        "pr_auc": 0.5770946644506307,
+        "brier": 0.18145738542079926
+      }
+    },
+    "fusion_vit": {
+      "name": "fusion_vit",
+      "mode": "fusion",
+      "image_encoder": "vit",
+      "parameters": 337985,
+      "best_epoch": 6,
+      "train_seconds": 265.8,
+      "val_roc_auc": 0.7155816903032399,
+      "test": {
+        "roc_auc": 0.730201714168253,
+        "roc_auc_ci": [
+          0.7027934466006109,
+          0.7566836608144724
+        ],
+        "pr_auc": 0.5648203645918844,
+        "brier": 0.18462605774402618
+      }
+    },
+    "late_fusion": {
+      "name": "late_fusion",
+      "mode": "late_fusion",
+      "test": {
+        "roc_auc": 0.7425932380620425,
+        "roc_auc_ci": [
+          0.7134649220133535,
+          0.7691827133902328
+        ],
+        "pr_auc": 0.5751086470031711,
+        "brier": 0.1812871676240531
+      }
+    }
+  },
+  "selected_fusion": "fusion_cnn",
+  "best_single_modality": "image_only_cnn",
+  "modality_ablation": {
+    "full": 0.7428971052184714,
+    "image_hidden": 0.6431035561394571,
+    "tabular_hidden": 0.714215173695829,
+    "image_shuffled": 0.5654409201812478,
+    "tabular_shuffled": 0.6693210356507673
+  },
+  "paired_comparisons": {
+    "fusion_cnn_minus_tabular_only": {
+      "difference": 0.09561760999544189,
+      "ci": [
+        0.06760227145147507,
+        0.12374806947736051
+      ],
+      "share_of_resamples_positive": 1.0
+    },
+    "fusion_cnn_minus_image_only_cnn": {
+      "difference": 0.023869212000965034,
+      "ci": [
+        0.006881889179804527,
+        0.04035079168412256
+      ],
+      "share_of_resamples_positive": 0.998
+    },
+    "fusion_cnn_minus_fusion_vit": {
+      "difference": 0.01269539105021844,
+      "ci": [
+        -0.004837203063037531,
+        0.02987521449003259
+      ],
+      "share_of_resamples_positive": 0.914
+    },
+    "fusion_cnn_minus_late_fusion": {
+      "difference": 0.0003038671564289386,
+      "ci": [
+        -0.007330812553721181,
+        0.007973101948481068
+      ],
+      "share_of_resamples_positive": 0.542
+    }
+  },
+  "simulator_ceiling_auc": 0.7687850229240958
+}

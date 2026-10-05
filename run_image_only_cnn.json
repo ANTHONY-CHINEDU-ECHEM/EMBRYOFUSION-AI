@@ -1,0 +1,80 @@
+{
+  "name": "image_only_cnn",
+  "config": {
+    "name": "image_only_cnn",
+    "mode": "image",
+    "image_encoder": "cnn",
+    "batch_size": 64,
+    "epochs": 6,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0005,
+    "patience": 4,
+    "experiments": [
+      {
+        "name": "tabular_only",
+        "mode": "tabular"
+      },
+      {
+        "name": "image_only_cnn",
+        "mode": "image",
+        "image_encoder": "cnn"
+      },
+      {
+        "name": "fusion_cnn",
+        "mode": "fusion",
+        "image_encoder": "cnn"
+      },
+      {
+        "name": "fusion_vit",
+        "mode": "fusion",
+        "image_encoder": "vit"
+      }
+    ],
+    "parameters": 559801,
+    "seed": 5
+  },
+  "history": [
+    {
+      "step": 1,
+      "train_loss": 0.5922105564139163,
+      "val_auc": 0.6825527499135248,
+      "learning_rate": 0.0018810718751735996
+    },
+    {
+      "step": 2,
+      "train_loss": 0.5600366374048406,
+      "val_auc": 0.6837795457165916,
+      "learning_rate": 0.0018629513657222644
+    },
+    {
+      "step": 3,
+      "train_loss": 0.5496098133788414,
+      "val_auc": 0.6604865675083593,
+      "learning_rate": 0.0013770276065793812
+    },
+    {
+      "step": 4,
+      "train_loss": 0.5456544444674537,
+      "val_auc": 0.7028456128213998,
+      "learning_rate": 0.0007352825095745366
+    },
+    {
+      "step": 5,
+      "train_loss": 0.5398763512750135,
+      "val_auc": 0.7042914793035858,
+      "learning_rate": 0.00020294503606878726
+    },
+    {
+      "step": 6,
+      "train_loss": 0.5348764557849585,
+      "val_auc": 0.703465928744379,
+      "learning_rate": 2.6707537666221203e-08
+    }
+  ],
+  "summary": {
+    "val_roc_auc": 0.7042914793035858,
+    "test_roc_auc": 0.7190278932175064,
+    "test_pr_auc": 0.5291042011372606,
+    "test_brier": 0.18879152834415436
+  }
+}
